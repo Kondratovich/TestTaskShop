@@ -1,0 +1,47 @@
+﻿@model StoreProductsViewModel
+@{
+    Layout = "_Layout";
+    ViewBag.Title = ViewBag.Title ?? "Products Table";
+}
+
+<h1 class="display-5 text-center">@Model.StoreName</h1>
+<table class="table table-sm table-striped table-bordered">
+    <thead>
+        <tr>
+            <th class="bg-primary text-white text-center">
+                Name
+            </th>
+            <th class="bg-primary text-white text-center" colspan="2">
+                Description
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var product in Model.Products) {
+            <tr>
+                <td>@product.Name</td>
+                <td>@product.Description</td>
+                <td class="d-grid gap-2 d-md-flex justify-content-md-center">
+                    <a class="btn btn-primary btn-block" href='@Url.Action("Edit", "Products", new { storeId = Model.StoreId, productId = product.Id})'>Edit</a>
+                    <form asp-antiforgery="true" asp-action="Delete" method="post">
+                        <input type="hidden" name="productId" asp-for="@product.Id" id="productId">
+                        <input type="hidden" name="storeId" asp-for="StoreId" id="storeId">
+                        <button class="btn btn-danger btn-block" type="submit">Delete</button>
+                    </form>
+                </td>
+            </tr>
+        }
+    </tbody>
+    <tfoot>
+        <tr>
+            <td colspan="2">
+            </td>
+            <td class="d-grid gap-2">
+                <a class="btn btn-success btn-block" href='@Url.Action("Add", "Products", new { storeId = Model.StoreId})'>Add</a>
+            </td>
+        </tr>
+    </tfoot>
+</table>
+
+
+

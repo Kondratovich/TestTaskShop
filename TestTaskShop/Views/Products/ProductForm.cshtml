@@ -1,0 +1,26 @@
+﻿@model ProductFormViewModel
+@{
+    Layout = "_Layout";
+    ViewBag.Title = ViewBag.Title ?? Model.ActionName + "Product";
+}
+
+<div class="container px-5 my-5">
+    <h1 class="display-5 text-center">@Model.ActionName Product</h1>
+    <div asp-validation-summary="All" class="text-danger"></div>
+    <form id="productForm" asp-antiforgery="true" asp-action="@Model.ActionName" method="post">
+        <input type="hidden" asp-for="ProductId" id="productId">
+        <input type="hidden" asp-for="StoreId" id="storeId">
+        <input type="hidden" asp-for="ActionName" id="storeId">
+        <div class="form-floating mb-3">
+            <input asp-for="ProductName" class="form-control" id="productName" type="text" />
+            <label for="productName">Name</label>
+        </div>
+        <div class="form-floating mb-3">
+            <textarea asp-for="ProductDescription" class="form-control" id="productDescription" type="text" style="height: 10rem;"></textarea>
+            <label for="productDescription">Description</label>
+        </div>
+        <div class="d-grid">
+            <button class="btn btn-primary btn-lg" id="submitButton" type="submit">Submit</button>
+        </div>
+    </form>
+</div>

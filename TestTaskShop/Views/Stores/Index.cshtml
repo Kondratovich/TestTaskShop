@@ -1,0 +1,32 @@
+﻿@model IEnumerable<Store>
+@{
+    Layout = "_Layout";
+    ViewBag.Title = ViewBag.Title ?? "Stores";
+}
+
+
+<table class="table table-sm table-striped table-bordered">
+    <thead>
+        <tr>
+            <th class="bg-primary text-white text-center">
+                Name
+            </th>
+            <th class="bg-primary text-white text-center">
+                Address
+            </th>
+            <th class="bg-primary text-white text-center">
+                Opening hours
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var store in Model) {
+            <tr>
+                <td>@Html.ActionLink(store.Name, "StoreProducts", "Products", new { id = store.Id })</td>
+                <td>@store.Address</td>
+                <td>@store.OperatingMode</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
